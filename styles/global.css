@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main {
+  @apply flex min-h-screen flex-col items-center justify-between bg-gradient-to-br from-transparent via-[#E8F4FC] to-gray-100 w-full h-full absolute top-0;
+}
+
+.nav-item {
+  @apply font-medium text-[#464655] text-lg text-center transition hover:text-[#FFB100];
+}
