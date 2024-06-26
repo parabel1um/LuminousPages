@@ -5,13 +5,18 @@ import Link from "next/link";
 import "../styles/global.css";
 
 export default function Home() {
-  const services = ["Telegram", "Discord", "WhatsApp"];
+  const services = [
+    "Telegram channel",
+    "Discord server",
+    "WhatsApp channel",
+    "community",
+  ];
   const [index, setIndex] = useState(0);
   const [typingText, setTypingText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
-  const typingSpeed = 100;
-  const eraseSpeed = 60;
-  const pauseTime = 2000;
+  const typingSpeed = 50;
+  const eraseSpeed = 30;
+  const pauseTime = 2500;
 
   useEffect(() => {
     let timer;
@@ -55,7 +60,7 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-between min-h-screen main">
       <nav className="w-full bg-white shadow-md flex justify-center">
-        <div className="max-w-[1200px] flex justify-between w-full gap-5 p-2 px-7">
+        <div className="max-w-[1300px] flex justify-between w-full gap-5 p-2 px-7">
           <div className="flex items-center">
             <Image
               src="/CourseSurge.png"
@@ -65,6 +70,11 @@ export default function Home() {
             />
           </div>
           <div className="flex gap-5">
+            <div className="flex items-center">
+              <Link href="#guide" className="nav-item">
+                How it works
+              </Link>
+            </div>
             <div className="flex items-center">
               <Link href="#features" className="nav-item">
                 Features
@@ -76,8 +86,8 @@ export default function Home() {
               </Link>
             </div>
             <div className="flex items-center">
-              <Link href="#guide" className="nav-item">
-                How it works
+              <Link href="#FAQ" className="nav-item">
+                FAQ
               </Link>
             </div>
           </div>
@@ -113,26 +123,56 @@ export default function Home() {
           </div>
         </div>
       </nav>
-      <section className="flex-grow flex flex-col items-center justify-center">
-        <h1 className="font-bold lg:text-5xl text-3xl text-center lg:text-wrap flex flex-col gap-3">
+      <section className="flex-grow flex flex-col items-center justify-center gap-4">
+        <h1 className="font-extrabold lg:text-6xl text-4xl text-center lg:text-wrap flex flex-col gap-3 tracking-tight">
           <span className="whitespace-nowrap">
-            <span>Launch your </span>
-            <span className="">
-              <span>{typingText}</span>
-            </span>
-            <span> online courses</span>
+            Top all-in-one solution for turning your
+          </span>
+          <span className="">
+            <span>{typingText}</span>
+            <span> into revenue </span>
           </span>
           <span>
-            <span>in </span>
             <span className="px-2 relative">
               <span className="absolute inset-0 bg-[#FFB100] -rotate-1"></span>
-              <span className="isolate text-white"> just minutes</span>
+              <span className="isolate text-white"> within a few minutes</span>
             </span>
           </span>
         </h1>
-        <h3>
-          CourseSurge lets you design a course with customizable templates{" "}
-        </h3>
+        <h1 className="lg:whitespace-nowrap lg:text-lg text-base font-bold mt-2 tracking-tight">
+          <span className="flex flex-col gap-1 text-center">
+            <span>
+              The <span className="underlined-element">ultimate</span> tool for
+              creating <span className="underlined-element">courses</span>,{" "}
+              <span className="underlined-element">websites</span>, or{" "}
+              <span className="underlined-element">paid-access platforms</span>
+            </span>
+            <span>
+              <span className="font-extrabold text-xl underlined-element">
+                with ease.
+              </span>
+            </span>
+          </span>
+        </h1>
+        <div className="max-w-[1400px] flex lg:flex-row flex-col items-center">
+          <div className="w-80 flex flex-col items-center gap-4">
+            <h1 className="font-semibold lg:text-3xl text-xl whitespace-nowrap">
+              Easy to use page builder
+            </h1>
+            <Image
+              src={"/interface-preview.png"}
+              alt="interface preview"
+              width={280}
+              height={200}
+              className="mr-8"
+            />
+            <h1 className="ml-6 mt-0.5 lg:text-lg tracking-tight leading-5">
+              Create your own unique pages effortlessly using our builder with
+              customizable sections. Whether you need progress bars, videos, or
+              other types of content, we've got you covered.
+            </h1>
+          </div>
+        </div>
       </section>
     </main>
   );

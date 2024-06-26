@@ -11,3 +11,7 @@
 .nav-item {
   @apply font-medium text-[#464655] text-lg text-center transition hover:text-[#FFB100];
 }
+
+.underlined-element {
+  @apply font-bold underline text-amber-500 decoration-amber-500 decoration-dashed decoration-[3px] underline-offset-4;
+}
