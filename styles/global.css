@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 .main {
-  @apply flex min-h-screen flex-col items-center justify-between bg-gradient-to-br from-[#86cdfc] via-[#39adfa] to-gray-100 w-full h-full absolute top-0;
+  @apply flex min-h-screen flex-col items-center justify-between w-full h-full absolute top-0;
 }
 
 .nav-item {
