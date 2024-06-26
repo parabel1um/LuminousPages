@@ -57,13 +57,110 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [index, isTyping]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const secondSection = document.getElementById("second-section");
+      const secondNavbar = document.getElementById("second-navbar");
+
+      if (secondSection && secondNavbar) {
+        const sectionTop = secondSection.getBoundingClientRect().top;
+        if (sectionTop <= 90) {
+          secondNavbar.classList.add("show");
+          secondSection.classList.add("active");
+        } else {
+          secondNavbar.classList.remove("show");
+          secondSection.classList.remove("active");
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <main className="flex flex-col items-center justify-between min-h-screen main">
-      <nav className="w-full bg-white shadow-md flex justify-center">
+      <Image
+        src={"/background.png"}
+        width={1920}
+        height={1080}
+        className="fixed z-0 bottom-0 w-screen h-screen"
+      />
+      <nav className="w-full flex justify-center fixed top-0">
         <div className="max-w-[1300px] flex justify-between w-full gap-5 p-2 px-7">
           <div className="flex items-center">
             <Image
-              src="/CourseSurge.png"
+              src="/CourseSurge-white.png"
+              width={220}
+              height={49}
+              alt="CourseSurge Logo"
+            />
+          </div>
+          <div className="flex gap-5">
+            <div className="flex items-center">
+              <Link href="#guide" className="nav-item text-white">
+                How it works
+              </Link>
+            </div>
+            <div className="flex items-center">
+              <Link href="#features" className="nav-item text-white">
+                Features
+              </Link>
+            </div>
+            <div className="flex items-center">
+              <Link href="#pricing" className="nav-item text-white">
+                Pricing
+              </Link>
+            </div>
+            <div className="flex items-center">
+              <Link href="#FAQ" className="nav-item text-white">
+                FAQ
+              </Link>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <div className="flex items-center">
+              <button
+                href="/designer/login"
+                className="rounded-full border-2 p-3 text-white font-semibold whitespace-nowrap h-11 inline-flex justify-center items-center gap-[0.5em] transition-all hover:scale-110 hover:text-[#FFB100]"
+              >
+                <svg
+                  xmlns="http://www.w3.org/1999/xlink"
+                  aria-hidden="true"
+                  role="img"
+                  className="icon"
+                  width="1.3em"
+                  height="1.3em"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M8 8a3 3 0 1 0 0-6a3 3 0 0 0 0 6m4.735 6c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139z"
+                  ></path>
+                </svg>
+                Login
+              </button>
+            </div>
+            <div className="whitespace-nowrap w-44 m-2 h-11 flex bg-[#FFB100] text-lg text-[#664700] justify-center items-center rounded-full transition-all hover:scale-110 hover:text-[#453000]">
+              <button href="pricing" className="font-semibold text-lg">
+                Get CourseSurge
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <nav
+        id="second-navbar"
+        className="w-full bg-white flex justify-center fixed top-0 z-20 h-20"
+      >
+        <div className="max-w-[1300px] flex justify-between w-full gap-5 p-2 px-7">
+          <div className="flex items-center">
+            <Image
+              src="/CourseSurge-black.png"
               width={220}
               height={49}
               alt="CourseSurge Logo"
@@ -95,13 +192,13 @@ export default function Home() {
             <div className="flex items-center">
               <button
                 href="/designer/login"
-                className="rounded-full border-2 p-3 font-semibold whitespace-nowrap h-11 inline-flex justify-center items-center gap-[0.5em] transition-all hover:scale-110 hover:text-[#FFB100]"
+                className="rounded-full bg-black text-white order-2 p-3 font-semibold whitespace-nowrap h-11 inline-flex justify-center items-center gap-[0.5em] transition-all hover:scale-110 hover:text-[#FFB100]"
               >
                 <svg
                   xmlns="http://www.w3.org/1999/xlink"
                   aria-hidden="true"
                   role="img"
-                  class="icon"
+                  className="icon"
                   width="1.3em"
                   height="1.3em"
                   viewBox="0 0 16 16"
@@ -119,12 +216,12 @@ export default function Home() {
                 Get CourseSurge
               </button>
             </div>
-            <></>
           </div>
         </div>
       </nav>
-      <section className="flex-grow flex flex-col items-center justify-center gap-4">
-        <h1 className="font-extrabold lg:text-6xl text-4xl text-center lg:text-wrap flex flex-col gap-3 tracking-tight">
+
+      <section className="fixed flex-grow flex flex-col items-center justify-center gap-4 bottom-80 top-36">
+        <h1 className="font-extrabold text-white lg:text-6xl text-4xl text-center lg:text-wrap flex flex-col gap-3 tracking-tight">
           <span className="whitespace-nowrap">
             Top all-in-one solution for turning your
           </span>
@@ -139,7 +236,7 @@ export default function Home() {
             </span>
           </span>
         </h1>
-        <h1 className="lg:whitespace-nowrap lg:text-lg text-base font-bold mt-2 tracking-tight">
+        <h1 className="lg:whitespace-nowrap lg:text-lg text-base font-bold mt-2 tracking-tight text-white">
           <span className="flex flex-col gap-1 text-center">
             <span>
               The <span className="underlined-element">ultimate</span> tool for
@@ -154,24 +251,32 @@ export default function Home() {
             </span>
           </span>
         </h1>
-        <div className="max-w-[1400px] flex lg:flex-row flex-col items-center">
-          <div className="w-80 flex flex-col items-center gap-4">
-            <h1 className="font-semibold lg:text-3xl text-xl whitespace-nowrap">
-              Easy to use page builder
-            </h1>
-            <Image
-              src={"/interface-preview.png"}
-              alt="interface preview"
-              width={280}
-              height={200}
-              className="mr-8"
-            />
-            <h1 className="ml-6 mt-0.5 lg:text-lg tracking-tight leading-5">
-              Create your own unique pages effortlessly using our builder with
-              customizable sections. Whether you need progress bars, videos, or
-              other types of content, we've got you covered.
-            </h1>
-          </div>
+      </section>
+      <section
+        id="second-section"
+        className="absolute top-3/4 flex flex-col items-center bg-white w-full pb-96 rounded-t-[80px]"
+      >
+        <div>
+          <h1 className="font-semibold text-4xl mt-16">
+            Why you should choose us over competitors?
+          </h1>
+        </div>
+        <div className="w-80 flex flex-col items-center gap-4">
+          <h1 className="font-semibold lg:text-3xl text-xl whitespace-nowrap">
+            Easy to use page builder
+          </h1>
+          <Image
+            src={"/interface-preview.png"}
+            alt="interface preview"
+            width={280}
+            height={200}
+            className="mr-8"
+          />
+          <h1 className="ml-6 mt-0.5 lg:text-lg tracking-tight leading-5">
+            Create your own unique pages effortlessly using our builder with
+            customizable sections. Whether you need progress bars, videos, or
+            other types of content, we've got you covered.
+          </h1>
         </div>
       </section>
     </main>

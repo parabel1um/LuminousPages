@@ -5,13 +5,25 @@
 @tailwind utilities;
 
 .main {
-  @apply flex min-h-screen flex-col items-center justify-between bg-gradient-to-br from-transparent via-[#E8F4FC] to-gray-100 w-full h-full absolute top-0;
+  @apply flex min-h-screen flex-col items-center justify-between bg-gradient-to-br from-[#86cdfc] via-[#39adfa] to-gray-100 w-full h-full absolute top-0;
 }
 
 .nav-item {
-  @apply font-medium text-[#464655] text-lg text-center transition hover:text-[#FFB100];
+  @apply font-semibold text-lg text-center transition hover:text-[#FFB100];
 }
 
 .underlined-element {
   @apply font-bold underline text-amber-500 decoration-amber-500 decoration-dashed decoration-[3px] underline-offset-4;
+}
+
+#second-navbar {
+  @apply transform -translate-y-full transition-transform duration-300 ease-out;
+}
+
+#second-navbar.show {
+  @apply transform translate-y-0;
+}
+
+#second-section.active {
+  @apply rounded-none;
 }
