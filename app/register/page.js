@@ -49,7 +49,7 @@ const Register = () => {
 
       if (res.status === 200) {
         setError("");
-        router.push("/designer/login");
+        router.push("/login");
       }
     } catch (error) {
       setError("Error, try again");

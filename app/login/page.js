@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import "../../../styles/global.css";
+import Image from "next/image";
+import "@/styles/global.css";
 import { useRouter } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
@@ -81,6 +82,20 @@ export default function Login() {
           </button>
           <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
         </form>
+        <button
+          className="text-black text-lg bg-white rounded w-full hover:bg-gray-300 py-2 mt-2 flex items-center justify-center gap-3 p-2"
+          onClick={() => {
+            signIn("google");
+          }}
+        >
+          <Image
+            src={"/google_logo_icon.png"}
+            alt="Google icon"
+            width={25}
+            height={25}
+          ></Image>
+          Sign In With Google
+        </button>
         <div className="text-center text-gray-500 mt-4">- OR -</div>
         <Link className="text-white mt-2 hover:underline" href={"/register"}>
           Register here
