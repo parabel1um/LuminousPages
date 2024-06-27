@@ -17,9 +17,9 @@ export const authOptions = {
         password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
-        await connect(credentials);
+        await connect();
         try {
-          const user = User.findOne({ email: credentials.email });
+          const user = await User.findOne({ email: credentials.email });
           if (user) {
             const isPasswordCorrect = await bcrypt.compare(
               credentials.password,
@@ -42,3 +42,6 @@ export const authOptions = {
     }),
   ],
 };
+
+export const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };

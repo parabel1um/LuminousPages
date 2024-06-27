@@ -3,8 +3,6 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import "../styles/global.css";
-import { getServerSession } from "next-auth";
-import SessionProvider from "../utils/SessionProvider";
 
 export default function Home() {
   const services = [
@@ -84,7 +82,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex flex-col items-center justify-between min-h-screen main">
+    <main className="flex flex-col items-center justify-between min-h-screen main left-0">
       <div class="fixed bottom-0 h-full w-full bg-[radial-gradient(125%_125%_at_50%_10%,#fff_35%,#00b3ff_100%)]">
         <div class="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
       </div>
@@ -122,8 +120,8 @@ export default function Home() {
           </div>
           <div className="flex gap-3">
             <div className="flex items-center">
-              <button
-                href="/designer/login"
+              <Link
+                href={"/designer/login"}
                 className="rounded-full border-2 p-3 font-semibold whitespace-nowrap h-11 inline-flex justify-center items-center gap-[0.5em] transition-all hover:scale-110 hover:text-[#FFB100]"
               >
                 <svg
@@ -139,9 +137,9 @@ export default function Home() {
                     fill="currentColor"
                     d="M8 8a3 3 0 1 0 0-6a3 3 0 0 0 0 6m4.735 6c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139z"
                   ></path>
-                </svg>
+                </svg>{" "}
                 Login
-              </button>
+              </Link>
             </div>
             <div className="whitespace-nowrap w-48 m-2 h-11 flex bg-[#FFB100] text-lg text-[#664700] justify-center items-center rounded-full transition-all hover:scale-110 hover:text-[#453000]">
               <button href="pricing" className="font-semibold text-lg">
@@ -189,9 +187,9 @@ export default function Home() {
           </div>
           <div className="flex gap-3">
             <div className="flex items-center">
-              <button
-                href="/designer/login"
-                className="rounded-full bg-black order-2 p-3 font-semibold text-white whitespace-nowrap h-11 inline-flex justify-center items-center gap-[0.5em] transition-all hover:scale-110 hover:text-[#FFB100]"
+              <Link
+                href={"/designer/login"}
+                className="rounded-full bg-black border-2 p-3 font-semibold whitespace-nowrap h-11 inline-flex justify-center items-center gap-[0.5em] transition-all hover:scale-110 hover:text-[#FFB100]"
               >
                 <svg
                   xmlns="http://www.w3.org/1999/xlink"
@@ -206,9 +204,9 @@ export default function Home() {
                     fill="currentColor"
                     d="M8 8a3 3 0 1 0 0-6a3 3 0 0 0 0 6m4.735 6c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139z"
                   ></path>
-                </svg>
+                </svg>{" "}
                 Login
-              </button>
+              </Link>
             </div>
             <div className="whitespace-nowrap w-48 m-2 h-11 flex bg-[#FFB100] text-lg text-[#664700] justify-center items-center rounded-full transition-all hover:scale-110 hover:text-[#453000]">
               <button href="pricing" className="font-semibold text-lg">

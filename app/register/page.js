@@ -7,7 +7,7 @@ import "../../styles/global.css";
 
 const Register = () => {
   const [error, setError] = useState("");
-  const router = useRouter;
+  const router = useRouter();
 
   const isValidEmail = (email) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -49,7 +49,7 @@ const Register = () => {
 
       if (res.status === 200) {
         setError("");
-        router.push("/login");
+        router.push("/designer/login");
       }
     } catch (error) {
       setError("Error, try again");
