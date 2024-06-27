@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import "../styles/global.css";
+import { getServerSession } from "next-auth";
+import SessionProvider from "../utils/SessionProvider";
 
 export default function Home() {
   const services = [
@@ -83,17 +85,14 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center justify-between min-h-screen main">
-      <Image
-        src={"/background.png"}
-        width={1920}
-        height={1080}
-        className="fixed z-0 bottom-0 w-screen h-screen"
-      />
+      <div class="fixed bottom-0 h-full w-full bg-[radial-gradient(125%_125%_at_50%_10%,#fff_35%,#00b3ff_100%)]">
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+      </div>
       <nav className="w-full flex justify-center fixed top-0">
         <div className="max-w-[1300px] flex justify-between w-full gap-5 p-2 px-7">
           <div className="flex items-center">
             <Image
-              src="/CourseSurge-white.png"
+              src="/CourseSurge-black.png"
               width={220}
               height={49}
               alt="CourseSurge Logo"
@@ -101,22 +100,22 @@ export default function Home() {
           </div>
           <div className="flex gap-5">
             <div className="flex items-center">
-              <Link href="#guide" className="nav-item text-white">
+              <Link href="#guide" className="nav-item">
                 How it works
               </Link>
             </div>
             <div className="flex items-center">
-              <Link href="#features" className="nav-item text-white">
+              <Link href="#features" className="nav-item">
                 Features
               </Link>
             </div>
             <div className="flex items-center">
-              <Link href="#pricing" className="nav-item text-white">
+              <Link href="#pricing" className="nav-item">
                 Pricing
               </Link>
             </div>
             <div className="flex items-center">
-              <Link href="#FAQ" className="nav-item text-white">
+              <Link href="#FAQ" className="nav-item">
                 FAQ
               </Link>
             </div>
@@ -125,7 +124,7 @@ export default function Home() {
             <div className="flex items-center">
               <button
                 href="/designer/login"
-                className="rounded-full border-2 p-3 text-white font-semibold whitespace-nowrap h-11 inline-flex justify-center items-center gap-[0.5em] transition-all hover:scale-110 hover:text-[#FFB100]"
+                className="rounded-full border-2 p-3 font-semibold whitespace-nowrap h-11 inline-flex justify-center items-center gap-[0.5em] transition-all hover:scale-110 hover:text-[#FFB100]"
               >
                 <svg
                   xmlns="http://www.w3.org/1999/xlink"
@@ -144,7 +143,7 @@ export default function Home() {
                 Login
               </button>
             </div>
-            <div className="whitespace-nowrap w-44 m-2 h-11 flex bg-[#FFB100] text-lg text-[#664700] justify-center items-center rounded-full transition-all hover:scale-110 hover:text-[#453000]">
+            <div className="whitespace-nowrap w-48 m-2 h-11 flex bg-[#FFB100] text-lg text-[#664700] justify-center items-center rounded-full transition-all hover:scale-110 hover:text-[#453000]">
               <button href="pricing" className="font-semibold text-lg">
                 Get CourseSurge
               </button>
@@ -192,7 +191,7 @@ export default function Home() {
             <div className="flex items-center">
               <button
                 href="/designer/login"
-                className="rounded-full bg-black text-white order-2 p-3 font-semibold whitespace-nowrap h-11 inline-flex justify-center items-center gap-[0.5em] transition-all hover:scale-110 hover:text-[#FFB100]"
+                className="rounded-full bg-black order-2 p-3 font-semibold text-white whitespace-nowrap h-11 inline-flex justify-center items-center gap-[0.5em] transition-all hover:scale-110 hover:text-[#FFB100]"
               >
                 <svg
                   xmlns="http://www.w3.org/1999/xlink"
@@ -211,7 +210,7 @@ export default function Home() {
                 Login
               </button>
             </div>
-            <div className="whitespace-nowrap w-44 m-2 h-11 flex bg-[#FFB100] text-lg text-[#664700] justify-center items-center rounded-full transition-all hover:scale-110 hover:text-[#453000]">
+            <div className="whitespace-nowrap w-48 m-2 h-11 flex bg-[#FFB100] text-lg text-[#664700] justify-center items-center rounded-full transition-all hover:scale-110 hover:text-[#453000]">
               <button href="pricing" className="font-semibold text-lg">
                 Get CourseSurge
               </button>
@@ -221,7 +220,7 @@ export default function Home() {
       </nav>
 
       <section className="fixed flex-grow flex flex-col items-center justify-center gap-4 bottom-80 top-36">
-        <h1 className="font-extrabold text-white lg:text-6xl text-4xl text-center lg:text-wrap flex flex-col gap-3 tracking-tight">
+        <h1 className="font-extrabold lg:text-6xl text-4xl text-center lg:text-wrap flex flex-col gap-3 tracking-tight">
           <span className="whitespace-nowrap">
             Top all-in-one solution for turning your
           </span>
@@ -229,14 +228,14 @@ export default function Home() {
             <span>{typingText}</span>
             <span> into revenue </span>
           </span>
-          <span>
+          <span className="mt-2.5">
             <span className="px-2 relative">
               <span className="absolute inset-0 bg-[#FFB100] -rotate-1"></span>
-              <span className="isolate text-white"> within a few minutes</span>
+              <span className="isolate"> within a few minutes</span>
             </span>
           </span>
         </h1>
-        <h1 className="lg:whitespace-nowrap lg:text-lg text-base font-bold mt-2 tracking-tight text-white">
+        <h1 className="lg:whitespace-nowrap lg:text-lg text-base font-bold mt-2 tracking-tight">
           <span className="flex flex-col gap-1 text-center">
             <span>
               The <span className="underlined-element">ultimate</span> tool for
@@ -254,29 +253,41 @@ export default function Home() {
       </section>
       <section
         id="second-section"
-        className="absolute top-3/4 flex flex-col items-center bg-white w-full pb-96 rounded-t-[80px]"
+        className="absolute top-3/4 bg-white w-full pb-96 rounded-t-[80px] flex justify-center"
       >
-        <div>
-          <h1 className="font-semibold text-4xl mt-16">
-            Why you should choose us over competitors?
+        <div className="">
+          <h1 className="font-semibold text-xl mt-8 mb-3">
+            What's this all about?
           </h1>
         </div>
-        <div className="w-80 flex flex-col items-center gap-4">
-          <h1 className="font-semibold lg:text-3xl text-xl whitespace-nowrap">
-            Easy to use page builder
+        <div className="max-w-[1100px] flex flex-col w-full justify-start">
+          <h1 className="font-semibold text-2xl mt-8 mb-3">
+            What makes us better than competitors?
           </h1>
-          <Image
-            src={"/interface-preview.png"}
-            alt="interface preview"
-            width={280}
-            height={200}
-            className="mr-8"
-          />
-          <h1 className="ml-6 mt-0.5 lg:text-lg tracking-tight leading-5">
-            Create your own unique pages effortlessly using our builder with
-            customizable sections. Whether you need progress bars, videos, or
-            other types of content, we've got you covered.
-          </h1>
+          <div className="flex items-center justify-start">
+            <div className="flex flex-col p-4 pt-1 w-3/4">
+              <Image
+                src={"/interface-preview.png"}
+                alt="interface preview"
+                width={280}
+                height={200}
+                className="ml-6 m-2"
+              />
+            </div>
+            <div className="h-full border-black">
+              <h1 className="ml-6 mt-0.5 lg:text-lg tracking-tight leading-5 flex flex-col">
+                <span className="text-4xl font-bold align-top mb-3">
+                  <span className="font-bold text-5xl align-middle">1. </span>
+                  Easy to use page builder
+                </span>
+                <span>
+                  Create your own unique pages effortlessly using our builder
+                  with customizable sections. Whether you need progress bars,
+                  videos, or other types of content, we've got you covered.
+                </span>
+              </h1>
+            </div>
+          </div>
         </div>
       </section>
     </main>
