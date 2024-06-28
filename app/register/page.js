@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import "../../styles/global.css";
+import "@/styles/global.css";
 
 const Register = () => {
   const [error, setError] = useState("");
