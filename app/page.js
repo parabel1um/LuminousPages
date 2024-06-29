@@ -64,12 +64,40 @@ export default function Home() {
 
   useEffect(() => {
     const sections = document.querySelectorAll("[id^='section-']");
+
     const handleScroll = () => {
       let currentIndex = null;
       sections.forEach((section, index) => {
         const rect = section.getBoundingClientRect();
-        if (rect.top > 0 && rect.top < window.innerHeight / 2) {
+        const top = rect.top; // distance from top of container to top of viewport
+        const height = rect.height;
+        const windowHeight = window.innerHeight;
+
+        if (top > 0 && top < window.innerHeight * 0.85) {
           currentIndex = index;
+          const scrollPercentage = Math.min(
+            100,
+            Math.max(
+              0,
+              (((windowHeight - top) * 2.15) / (windowHeight + height)) * 100
+            ) // added margin
+          );
+
+          const scrollIndicator = document.querySelector(
+            `.scroll-indicator-${index + 1}`
+          );
+
+          if (scrollIndicator) {
+            scrollIndicator.style.height = scrollPercentage + "%";
+          }
+        } else {
+          const scrollIndicator = document.querySelector(
+            `.scroll-indicator-${index + 1}`
+          );
+
+          if (scrollIndicator) {
+            scrollIndicator.style.height = "0%";
+          }
         }
       });
       setHoveredIndex(currentIndex);
@@ -231,102 +259,124 @@ export default function Home() {
           </div>
         </section>
         <div className="border-b-2"></div>
-        <section className="text-white w-full flex items-center justify-center">
-          <div className="max-w-[900px] w-full flex flex-row justify-center items-center">
-            <div className="flex flex-col items-start">
-              <h3 className="flex flex-col">
-                <span>Design stunning websites</span>
-                <span>effortlessly</span>
-              </h3>
-              <div className="flex flex-row align-text-bottom leading-[2rem] mt-3">
-                <div className="mr-3 rounded-lg h-12 w-12 bg-white flex items-center justify-center text-black">
-                  1.
+        <section
+          className="text-white w-full flex items-center justify-center"
+          id="features"
+        >
+          <div className="max-w-[1040px] w-full flex flex-col">
+            <h3 className="flex flex-col text-center mb-8 font-bold lg:text-3xl text-2xl">
+              <span>Design stunning websites</span>
+              <span>effortlessly</span>
+            </h3>
+            <div className="flex flex-col items-start mb-96">
+              <div
+                className={`flex rounded-lg flex-row align-text-bottom feature ${
+                  hoveredIndex === 0 ? "highlighted" : ""
+                }`}
+                id="section-1"
+              >
+                <div className="flex flex-col items-center">
+                  <div
+                    className={`mr-3 rounded-full h-12 w-12 bg-[#00abab] text-white index-1 flex items-center justify-center text-black glow-index-low ${
+                      hoveredIndex === 0 ? "glow-index-high" : ""
+                    }`}
+                  >
+                    1.
+                  </div>
+                  <div className="scroll-indicator-1 bg-[#00ffff] w-1 h-full mr-3"></div>
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col pb-4">
                   <h1
-                    id="section-1"
-                    className={`text-xl ${
+                    className={`text-2xl  ${
                       hoveredIndex === 0 ? "font-bold" : ""
                     }`}
                   >
                     Ease of Use
                   </h1>
-                  <p className="text-base w-80">
+                  <p className="text-lg w-[24rem]">
                     Webpages consist of sections in which you can add all sorts
                     of content such as videos, audios, text, images, quizzes. We
                     also provide seamless integration with Stripe payments,
-                    subscriptions, analytics. Choose one our market-optimized
+                    subscriptions, analytics. Choose one of our market-optimized
                     templates, then add your own content by customizing it with
                     our designer.
                   </p>
                 </div>
-                <div className="ml-8">
-                  <Image
-                    src={"/interface-preview.png"}
-                    width={650}
-                    height={650}
-                  />
-                </div>
+                <Image
+                  src={"/interface-preview.png"}
+                  width={500}
+                  height={500}
+                  className="pb-5"
+                />
+                <div className="ml-8"></div>
               </div>
-              <div className="flex flex-row align-text-bottom leading-[2rem] mt-3">
-                <div className="mr-3 rounded-lg h-12 w-12 bg-white flex items-center justify-center text-black">
-                  2.
+              <div
+                className={`flex flex-row align-text-bottom feature ${
+                  hoveredIndex === 1 ? "highlighted" : ""
+                }`}
+                id="section-2"
+              >
+                <div className="flex flex-col items-center">
+                  <div
+                    className={`mr-3 rounded-full h-12 w-12 index-2 bg-[#00abab] text-white flex items-center justify-center text-black glow-index-low ${
+                      hoveredIndex === 2 ? "glow-index-high" : ""
+                    }`}
+                    id="index-2"
+                  >
+                    2.
+                  </div>
+                  <div className="scroll-indicator-2 bg-[#00ffff] w-1 h-full mr-3"></div>
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col pb-4">
                   <h1
-                    id="section-2"
                     className={`text-xl ${
                       hoveredIndex === 1 ? "font-bold" : ""
                     }`}
                   >
                     Ease of Use
                   </h1>
-                  <p className="text-base w-80">
+                  <p className="text-base w-[24rem]">
                     Webpages consist of sections in which you can add all sorts
                     of content such as videos, audios, text, images, quizzes. We
                     also provide seamless integration with Stripe payments,
-                    subscriptions, analytics. Choose one our market-optimized
+                    subscriptions, analytics. Choose one of our market-optimized
                     templates, then add your own content by customizing it with
                     our designer.
                   </p>
                 </div>
-                <div className="ml-8">
-                  <Image
-                    src={"/interface-preview.png"}
-                    width={650}
-                    height={650}
-                  />
-                </div>
+                <div className="ml-8"></div>
               </div>
-              <div className="flex flex-row align-text-bottom leading-[2rem] mt-3">
-                <div className="mr-3 rounded-lg h-12 w-12 bg-white flex items-center justify-center text-black">
+              <div
+                className={`flex mb-96 flex-row align-text-bottom feature ${
+                  hoveredIndex === 2 ? "highlighted" : ""
+                }`}
+                id="section-3"
+              >
+                <div
+                  className={`mr-3 rounded-full h-12 w-12 bg-[#00abab] index-3 text-white flex items-center justify-center text-black glow-index-low ${
+                    hoveredIndex === 2 ? "glow-index-high" : ""
+                  }`}
+                >
                   3.
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col pb-4">
                   <h1
-                    id="section-3"
                     className={`text-xl ${
                       hoveredIndex === 2 ? "font-bold" : ""
                     }`}
                   >
                     Ease of Use
                   </h1>
-                  <p className="text-base w-80">
+                  <p className="text-base w-[24rem]">
                     Webpages consist of sections in which you can add all sorts
                     of content such as videos, audios, text, images, quizzes. We
                     also provide seamless integration with Stripe payments,
-                    subscriptions, analytics. Choose one our market-optimized
+                    subscriptions, analytics. Choose one of our market-optimized
                     templates, then add your own content by customizing it with
                     our designer.
                   </p>
                 </div>
-                <div className="ml-8">
-                  <Image
-                    src={"/interface-preview.png"}
-                    width={289}
-                    height={244}
-                  />
-                </div>
+                <div className="ml-8"></div>
               </div>
             </div>
           </div>
