@@ -73,13 +73,53 @@ export default function Home() {
         const height = rect.height;
         const windowHeight = window.innerHeight;
 
-        if (top > 0 && top < window.innerHeight * 0.85) {
+        let multiplierScreen;
+        let multiplierArea;
+
+        if (windowHeight > 2500) {
+          multiplierScreen = 1.6;
+          multiplierArea = 0.55;
+        } else if (windowHeight > 2200) {
+          multiplierScreen = 1.7;
+          multiplierArea = 0.6;
+        } else if (windowHeight > 2000) {
+          multiplierScreen = 1.8;
+          multiplierArea = 0.63;
+        } else if (windowHeight > 1800) {
+          multiplierScreen = 1.9;
+          multiplierArea = 0.65;
+        } else if (windowHeight > 1600) {
+          multiplierScreen = 2.0;
+          multiplierArea = 0.7;
+        } else if (windowHeight > 1440) {
+          multiplierScreen = 2.2;
+          multiplierArea = 0.75;
+        } else if (windowHeight > 1280) {
+          multiplierScreen = 2.4;
+          multiplierArea = 0.8;
+        } else if (windowHeight > 1080) {
+          multiplierScreen = 2.5;
+          multiplierArea = 0.8;
+        } else if (windowHeight > 900) {
+          multiplierScreen = 2.6;
+          multiplierArea = 0.85;
+        } else if (windowHeight > 720) {
+          multiplierScreen = 2.7;
+          multiplierArea = 0.9;
+        } else {
+          multiplierScreen = 3.4;
+          multiplierArea = 1.0;
+        }
+
+        if (top > 0 && top < window.innerHeight * multiplierArea) {
           currentIndex = index;
           const scrollPercentage = Math.min(
             100,
             Math.max(
               0,
-              (((windowHeight - top) * 2.15) / (windowHeight + height)) * 100
+              (((windowHeight - top) * multiplierScreen) /
+                (windowHeight + height)) *
+                100
             ) // added margin
           );
 
@@ -111,7 +151,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center justify-between min-h-screen main left-0">
-      <div class="fixed top-0 z-[-2] h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]"></div>
+      <div className="fixed top-0 z-[-2] h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]"></div>
       <nav className="w-full flex justify-center fixed top-0">
         <div className="max-w-[1300px] flex justify-between w-full gap-5 p-2 px-7">
           <div className="flex items-center">
@@ -239,8 +279,8 @@ export default function Home() {
           </span>
         </h1>
       </section>
-      <section className="relative top-96 flex flex-col gap-28">
-        <section>
+      <section className="relative top-96 flex flex-col">
+        <section className="justify-center flex">
           {" "}
           <div className="max-w-[1100px] pb-12 z-40 flex flex-col justify-center">
             <h1 className="font-semibold justify-center lg:text-4xl text-2xl mt-28 mb-12 tracking-tight animate-text-gradient inline-flex bg-gradient-to-r from-neutral-900 via-slate-500 to-neutral-500 bg-[200%_auto] bg-clip-text leading-tight text-transparent dark:from-neutral-100 dark:via-slate-400 dark:to-neutral-400">
@@ -253,12 +293,33 @@ export default function Home() {
                 monetize their digital content.
               </span>{" "}
               With its intuitive designer, you can quickly create professional
-              courses and websites. Seamlessly manage your content and
-              effortlessly convert your audience into paying subscribers.
+              courses and websites. Seamlessly manage your content and convert
+              your audience into paying subscribers.
             </p>
           </div>
         </section>
-        <div className="border-b-2"></div>
+        <div className="border-b-2 mb-32 mt-5"></div>
+        <div className="mb-40">
+          <div className="flex flex-col items-center">
+            <h1 className="text-white lg:text-3xl text-xl mb-16">
+              Examples of websites you can create
+            </h1>
+            <div className="flex gap-20">
+              <div className="flex flex-col items-center justify-center w-96 h-[42rem]">
+                <h1 className="text-white mb-5">Blog</h1>
+                <div className="bg-white w-full h-full">website here</div>
+              </div>
+              <div className="flex flex-col items-center justify-center w-96 h-[42rem]">
+                <h1 className="text-white mb-5">Course</h1>
+                <div className="bg-white w-full h-full">website here</div>
+              </div>
+              <div className="flex flex-col items-center justify-center w-96 h-[42rem]">
+                <h1 className="text-white mb-5">About page</h1>
+                <div className="bg-white w-full h-full">website here</div>
+              </div>
+            </div>
+          </div>
+        </div>
         <section
           className="text-white w-full flex items-center justify-center"
           id="features"
@@ -287,19 +348,20 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col pb-4">
                   <h1
-                    className={`text-2xl  ${
+                    className={`text-2xl mb-1  ${
                       hoveredIndex === 0 ? "font-bold" : ""
                     }`}
                   >
-                    Ease of Use
+                    Design
                   </h1>
-                  <p className="text-lg w-[24rem]">
-                    Webpages consist of sections in which you can add all sorts
-                    of content such as videos, audios, text, images, quizzes. We
-                    also provide seamless integration with Stripe payments,
-                    subscriptions, analytics. Choose one of our market-optimized
-                    templates, then add your own content by customizing it with
-                    our designer.
+
+                  <p className="text-lg w-[24rem] tracking-tight">
+                    Begin by choosing one of our market-optimized templates,
+                    then add your own content by customizing it with our
+                    designer. Webpages consist of sections in which you can add
+                    all sorts of content such as videos, audios, text, images,
+                    and quizzes. Our designer was created to be user-friendly
+                    without compromising personalization.
                   </p>
                 </div>
                 <Image
@@ -333,15 +395,11 @@ export default function Home() {
                       hoveredIndex === 1 ? "font-bold" : ""
                     }`}
                   >
-                    Ease of Use
+                    Integrate
                   </h1>
                   <p className="text-base w-[24rem]">
-                    Webpages consist of sections in which you can add all sorts
-                    of content such as videos, audios, text, images, quizzes. We
-                    also provide seamless integration with Stripe payments,
-                    subscriptions, analytics. Choose one of our market-optimized
-                    templates, then add your own content by customizing it with
-                    our designer.
+                    We provide seamless integration with Stripe payments,
+                    subscriptions, analytics.
                   </p>
                 </div>
                 <div className="ml-8"></div>
