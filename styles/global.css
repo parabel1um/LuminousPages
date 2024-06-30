@@ -47,3 +47,28 @@ body {
 .underlined-element-white {
   @apply font-bold underline decoration-amber-500 decoration-dashed decoration-[3px] underline-offset-4;
 }
+
+.text-gradient-light-blue {
+  background: #bceffc;
+  background: radial-gradient(
+    circle farthest-corner at center center,
+    #bceffc 0%,
+    #63b1ff 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-blue {
+  background: #e1f4f9;
+  background: linear-gradient(to right, #e1f4f9 0%, #a6c5cc 50%, #6e8287 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-blue-white {
+  background: #d0d0d0;
+  background: linear-gradient(to left, #d0d0d0 0%, #366e6e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

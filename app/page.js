@@ -75,40 +75,36 @@ export default function Home() {
 
         let multiplierScreen;
         let multiplierArea;
-
         if (windowHeight > 2500) {
-          multiplierScreen = 1.6;
-          multiplierArea = 0.55;
+          multiplierScreen = 1.0;
+          multiplierArea = 0.5;
         } else if (windowHeight > 2200) {
-          multiplierScreen = 1.7;
-          multiplierArea = 0.6;
+          multiplierScreen = 1.1;
+          multiplierArea = 0.55;
         } else if (windowHeight > 2000) {
-          multiplierScreen = 1.8;
-          multiplierArea = 0.63;
+          multiplierScreen = 1.2;
+          multiplierArea = 0.6;
         } else if (windowHeight > 1800) {
-          multiplierScreen = 1.9;
+          multiplierScreen = 1.3;
           multiplierArea = 0.65;
         } else if (windowHeight > 1600) {
-          multiplierScreen = 2.0;
+          multiplierScreen = 1.4;
           multiplierArea = 0.7;
         } else if (windowHeight > 1440) {
-          multiplierScreen = 2.2;
+          multiplierScreen = 1.6;
           multiplierArea = 0.75;
         } else if (windowHeight > 1280) {
-          multiplierScreen = 2.4;
+          multiplierScreen = 1.8;
           multiplierArea = 0.8;
         } else if (windowHeight > 1080) {
-          multiplierScreen = 2.5;
-          multiplierArea = 0.8;
-        } else if (windowHeight > 900) {
-          multiplierScreen = 2.6;
+          multiplierScreen = 2.0;
           multiplierArea = 0.85;
-        } else if (windowHeight > 720) {
-          multiplierScreen = 2.7;
+        } else if (windowHeight > 900) {
+          multiplierScreen = 2.3;
           multiplierArea = 0.9;
         } else {
-          multiplierScreen = 3.4;
-          multiplierArea = 1.0;
+          multiplierScreen = 2.6;
+          multiplierArea = 0.95;
         }
 
         if (top > 0 && top < window.innerHeight * multiplierArea) {
@@ -123,20 +119,32 @@ export default function Home() {
             ) // added margin
           );
 
-          const scrollIndicator = document.querySelector(
-            `.scroll-indicator-${index + 1}`
-          );
+          if (index === 0 || index === 1) {
+            const scrollIndicator = document.querySelector(
+              `.scroll-indicator-${index + 1}`
+            );
 
-          if (scrollIndicator) {
-            scrollIndicator.style.height = scrollPercentage + "%";
+            if (scrollIndicator) {
+              scrollIndicator.style.height = scrollPercentage + "%";
+            }
           }
         } else {
           const scrollIndicator = document.querySelector(
             `.scroll-indicator-${index + 1}`
           );
 
-          if (scrollIndicator) {
-            scrollIndicator.style.height = "0%";
+          const scrollIndicator1 =
+            document.querySelector(`.scroll-indicator-1`);
+          const scrollIndicator2 =
+            document.querySelector(`.scroll-indicator-2`);
+
+          if (
+            scrollIndicator &&
+            scrollIndicator.getBoundingClientRect().top < 0 &&
+            scrollIndicator.getBoundingClientRect().bottom < 0
+          ) {
+            scrollIndicator1.style.height = "0%";
+            scrollIndicator2.style.height = "0%";
           }
         }
       });
@@ -152,14 +160,14 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-between min-h-screen main left-0">
       <div className="fixed top-0 z-[-2] h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]"></div>
-      <nav className="w-full flex justify-center fixed top-0">
+      <nav className="w-full flex justify-center fixed top-0 z-50">
         <div className="max-w-[1300px] flex justify-between w-full gap-5 p-2 px-7">
           <div className="flex items-center">
             <Image
-              src="/CourseSurge-white.png"
-              width={220}
-              height={49}
-              alt="CourseSurge Logo"
+              src="/LuminousPages.png"
+              width={300}
+              height={120}
+              alt="Luminous Pages Logo"
             />
           </div>
           <div className="flex gap-5">
@@ -211,7 +219,7 @@ export default function Home() {
                   className=" text-white font-semibold text-lg whitespace-nowrap w-48 m-2 h-11 flex bg-[#FFB100] text-lg text-[#664700] justify-center items-center rounded-full transition-all hover:scale-110 hover:text-[#453000]"
                   href={"#pricing"}
                 >
-                  Get CourseSurge
+                  Get Luminous Pages
                 </Link>
               </div>
             </div>
@@ -287,7 +295,7 @@ export default function Home() {
               What's the platform all about?
             </h1>
             <p className="text-white text-2xl leading-tight">
-              CourseSurge is the ultimate all-in-one solution for creators
+              Luminous Pages is the ultimate all-in-one solution for creators
               looking to{" "}
               <span className="font-bold underlined-element">
                 monetize their digital content.
@@ -301,8 +309,8 @@ export default function Home() {
         <div className="border-b-2 mb-32 mt-5"></div>
         <div className="mb-40">
           <div className="flex flex-col items-center">
-            <h1 className="text-white lg:text-3xl text-xl mb-16">
-              Examples of websites you can create
+            <h1 className="text-white lg:text-5xl text-2xl font-bold mb-24 text-gradient-blue">
+              Examples
             </h1>
             <div className="flex gap-20">
               <div className="flex flex-col items-center justify-center w-96 h-[42rem]">
@@ -325,11 +333,11 @@ export default function Home() {
           id="features"
         >
           <div className="max-w-[1040px] w-full flex flex-col">
-            <h3 className="flex flex-col text-center mb-8 font-bold lg:text-3xl text-2xl">
+            <h3 className="flex flex-col text-center mb-16 font-bold lg:text-4xl text-2xl text-gradient-blue-white">
               <span>Design stunning websites</span>
               <span>effortlessly</span>
             </h3>
-            <div className="flex flex-col items-start mb-96">
+            <div className="flex flex-col items-start">
               <div
                 className={`flex rounded-lg flex-row align-text-bottom feature ${
                   hoveredIndex === 0 ? "highlighted" : ""
@@ -355,13 +363,19 @@ export default function Home() {
                     Design
                   </h1>
 
-                  <p className="text-lg w-[24rem] tracking-tight">
-                    Begin by choosing one of our market-optimized templates,
-                    then add your own content by customizing it with our
-                    designer. Webpages consist of sections in which you can add
-                    all sorts of content such as videos, audios, text, images,
-                    and quizzes. Our designer was created to be user-friendly
-                    without compromising personalization.
+                  <p className="text-lg w-[24rem] tracking-tight flex flex-col gap-5">
+                    <span>
+                      Begin by choosing one of our market-optimized templates,
+                      then add your own content by customizing it with our
+                      designer. Webpages consist of sections in which you can
+                      add all sorts of content such as videos, audios, text,
+                      images, and quizzes.
+                    </span>
+                    <span>
+                      No need to worry about responsiveness — our designer
+                      automatically adapts the website to all devices, making
+                      your site look great everywhere.
+                    </span>
                   </p>
                 </div>
                 <Image
@@ -369,6 +383,7 @@ export default function Home() {
                   width={500}
                   height={500}
                   className="pb-5"
+                  alt="interface preview"
                 />
                 <div className="ml-8"></div>
               </div>
@@ -380,10 +395,9 @@ export default function Home() {
               >
                 <div className="flex flex-col items-center">
                   <div
-                    className={`mr-3 rounded-full h-12 w-12 index-2 bg-[#00abab] text-white flex items-center justify-center text-black glow-index-low ${
-                      hoveredIndex === 2 ? "glow-index-high" : ""
+                    className={`mr-3 rounded-full h-[48px] w-[48px] leading-[48px] index-2 bg-[#00abab] text-white flex items-center justify-center text-black glow-index-low ${
+                      hoveredIndex === 1 ? "glow-index-high" : ""
                     }`}
-                    id="index-2"
                   >
                     2.
                   </div>
@@ -395,17 +409,26 @@ export default function Home() {
                       hoveredIndex === 1 ? "font-bold" : ""
                     }`}
                   >
-                    Integrate
+                    Analyze
                   </h1>
                   <p className="text-base w-[24rem]">
-                    We provide seamless integration with Stripe payments,
-                    subscriptions, analytics.
+                    Our website templates are built to drive conversions. For
+                    even better performance, we provide weekly reports on user
+                    behavior and site performance. Use these insights to
+                    discover what works best and optimize your content, enhance
+                    user experience, and increase conversions.
                   </p>
                 </div>
+                <Image
+                  src={"/analytics preview.png"}
+                  width={500}
+                  height={500}
+                  alt="analytics preview"
+                />
                 <div className="ml-8"></div>
               </div>
               <div
-                className={`flex mb-96 flex-row align-text-bottom feature ${
+                className={`flex mb-20 flex-row align-text-bottom feature ${
                   hoveredIndex === 2 ? "highlighted" : ""
                 }`}
                 id="section-3"
@@ -436,6 +459,16 @@ export default function Home() {
                 </div>
                 <div className="ml-8"></div>
               </div>
+            </div>
+          </div>
+        </section>
+        <section className="flex gap-36 w-full items-center justify-center">
+          <div className="flex flex-col gap-20">
+            <h1 className="lg:text-5xl texl-2xl font-bold text-gradient-light-blue">
+              Pricing
+            </h1>
+            <div className="flex items-cemter flex-col w-48 h-72">
+              <h1>Individual</h1>
             </div>
           </div>
         </section>
