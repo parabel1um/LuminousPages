@@ -2,8 +2,8 @@ import { getServerSession } from "next-auth";
 import SessionProvider from "../utils/SessionProvider";
 
 export const metadata = {
-  title: "CourseSurge",
-  description: "Create courses easily",
+  title: "Luminous Pages",
+  description: "Create webpages easily",
 };
 
 export default async function RootLayout({ children }) {

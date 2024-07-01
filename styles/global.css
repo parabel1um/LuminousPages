@@ -20,6 +20,10 @@ body {
   @apply font-bold underline text-amber-500 decoration-amber-500 decoration-dashed decoration-[3px] underline-offset-4;
 }
 
+.underlined-element-blue {
+  @apply font-bold underline text-amber-500 decoration-[#3A94FF] decoration-dashed decoration-[3px] underline-offset-4;
+}
+
 #second-navbar {
   @apply transform -translate-y-full transition-transform duration-300 ease-out;
 }
@@ -71,4 +75,44 @@ body {
   background: linear-gradient(to left, #d0d0d0 0%, #366e6e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.leading-4rem {
+  line-height: 4rem !important;
+}
+
+.gradient-blue-yellow {
+  background-image: linear-gradient(
+    to right top,
+    #669cee,
+    #00bdfe,
+    #00d6dc,
+    #00e693,
+    #b6e942
+  );
+}
+
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+.select-button:hover .arrow {
+  transform: rotate(360deg);
+}
+
+.gradient-orange-red {
+  background-image: linear-gradient(
+    to right top,
+    #be9608,
+    #dd6317,
+    #e90048,
+    #d10084,
+    #7907c2
+  );
+}
+
+.blue-blur {
+  -webkit-box-shadow: 0px 0px 58px 10px rgba(42, 180, 255, 0.9);
+  -moz-box-shadow: 0px 0px 58px 10px rgba(42, 180, 255, 0.9);
+  box-shadow: 0px 0px 58px 10px rgba(42, 180, 255, 0.9);
 }

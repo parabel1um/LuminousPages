@@ -19,6 +19,7 @@ export default function Home() {
   const [isTyping, setIsTyping] = useState(true);
   const [isDashboardHovered, setIsDashboardHovered] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [monthly, setMonthly] = useState(true);
   const typingSpeed = 50;
   const eraseSpeed = 30;
   const pauseTime = 2500;
@@ -329,7 +330,7 @@ export default function Home() {
           </div>
         </div>
         <section
-          className="text-white w-full flex items-center justify-center"
+          className="text-white w-full flex items-center justify-center "
           id="features"
         >
           <div className="max-w-[1040px] w-full flex flex-col">
@@ -463,12 +464,154 @@ export default function Home() {
           </div>
         </section>
         <section className="flex gap-36 w-full items-center justify-center">
-          <div className="flex flex-col gap-20">
-            <h1 className="lg:text-5xl texl-2xl font-bold text-gradient-light-blue">
-              Pricing
+          <div className="flex flex-col items-center mb-20">
+            <h1 class="lg:text-5xl text-xl font-bold text-gradient-light-blue mb-20 p-2">
+              Pick a plan that is best for your needs
             </h1>
-            <div className="flex items-cemter flex-col w-48 h-72">
-              <h1>Individual</h1>
+            <div className="flex items-center p-2 bg-[#283140] rounded-lg gap-3 px-2 mb-8">
+              <button
+                onClick={() => setMonthly(true)}
+                className={`text-white text-lg p-2 rounded-lg px-3 ${
+                  monthly === true
+                    ? "bg-[#00091D]"
+                    : "bg-[#283140] hover:scale-105"
+                }`}
+              >
+                Monthly Payment
+              </button>
+              <button
+                onClick={() => setMonthly(false)}
+                className={`text-white text-lg p-2 rounded-lg px-3 ${
+                  monthly === true
+                    ? "bg-[#283140] hover:scale-105"
+                    : "bg-[#00091D]"
+                }`}
+              >
+                Annual Payment
+              </button>
+            </div>
+            <div className="flex gap-5 items-end">
+              <div className="flex p-5 items-start flex-col w-[15rem] h-[360px] gap-2 bg-[#161B1F] rounded-lg py-7">
+                <h1 className="text-[#999999] font-medium text-xl mb-1">
+                  Individual
+                </h1>
+                <h1 className="text-5xl text-white font-bold">
+                  {monthly === true ? "$79" : "$65"}
+                </h1>
+                <h1 className="text-sm text-white text-[#999999] mt-2">
+                  Per month
+                </h1>
+                <div className="flex flex-col gap-2">
+                  <div className="flex gap-2 text-white text-base">
+                    <Image src={"/checkmark.svg"} width={25} height={25} />
+                    5% Transaction fee
+                  </div>
+                  <div className="flex gap-2 text-white text-base">
+                    <Image src={"/checkmark.svg"} width={25} height={25} />
+                    Unlimited pages
+                  </div>
+                  <div className="flex gap-2 text-white text-base">
+                    <Image src={"/checkmark.svg"} width={25} height={25} />
+                    Analytics
+                  </div>
+                  <div className="flex gap-2 text-white text-base">
+                    <Image src={"/checkmark.svg"} width={25} height={25} />
+                    Cancel anytime
+                  </div>
+                </div>
+                <button className="flex text-white text-lg gap-2 w-full p-2 mt-2 rounded-lg gradient-blue-yellow justify-center items-center hover:scale-105 select-button">
+                  Select{" "}
+                  <Image
+                    src={"/right-arrow.svg"}
+                    width={20}
+                    height={15}
+                    className="arrow"
+                  />
+                </button>
+              </div>
+              <div className="flex p-5 items-start flex-col w-[15rem] h-[360px] gap-2 bg-[#161B1F] rounded-lg py-7">
+                <h1 className="text-[#999999] font-medium text-xl mb-1">Pro</h1>
+                <h1 className="text-5xl text-white font-bold">
+                  {monthly === true ? "$99" : "$79"}
+                </h1>
+                <h1 className="text-sm text-white text-[#999999] mt-2">
+                  Per month
+                </h1>
+                <div className="flex flex-col gap-2">
+                  <div className="flex gap-2 text-white text-base">
+                    <Image src={"/checkmark.svg"} width={25} height={25} />
+                    3% Transaction fee
+                  </div>
+                  <div className="flex gap-2 text-white text-base">
+                    <Image src={"/checkmark.svg"} width={25} height={25} />
+                    Unlimited pages
+                  </div>
+                  <div className="flex gap-2 text-white text-base">
+                    <Image src={"/checkmark.svg"} width={25} height={25} />
+                    Analytics
+                  </div>
+                  <div className="flex gap-2 text-white text-base">
+                    <Image src={"/checkmark.svg"} width={25} height={25} />
+                    Cancel anytime
+                  </div>
+                </div>
+                <button className="flex text-white text-lg gap-2 w-full p-2 mt-2 rounded-lg gradient-blue-yellow justify-center items-center hover:scale-105 select-button">
+                  Select{" "}
+                  <Image
+                    src={"/right-arrow.svg"}
+                    width={20}
+                    height={15}
+                    className="arrow"
+                  />
+                </button>
+              </div>
+              <div className="flex flex-col">
+                <div className="h-7 bg-[#2492FF] text-sm rounded-t-lg text-white text-center py-1 z-20 relative">
+                  Most popular
+                </div>
+                <div className="flex p-5 items-start flex-col w-[15rem] h-[390px] gap-2 bg-[#152773] blue-blur rounded-lg py-7 z-10 relative">
+                  <h1 className="text-[#999999] font-medium text-xl mb-1">
+                    Business
+                  </h1>
+                  <h1 className="text-5xl text-white font-bold">
+                    {monthly === true ? "$129" : "$105"}
+                  </h1>
+                  <h1 className="text-sm text-white text-[#999999] mt-2">
+                    Per month
+                  </h1>
+                  <div className="flex flex-col gap-2">
+                    <div className="flex gap-2 text-white text-base">
+                      <Image src={"/checkmark.svg"} width={25} height={25} />
+                      2% Transaction fee
+                    </div>
+                    <div className="flex gap-2 text-white text-base">
+                      <Image src={"/checkmark.svg"} width={25} height={25} />
+                      Unlimited pages
+                    </div>
+                    <div className="flex gap-2 text-white text-base">
+                      <Image src={"/checkmark.svg"} width={25} height={25} />
+                      Analytics
+                    </div>
+                    <div className="flex gap-2 text-white text-base">
+                      <Image src={"/checkmark.svg"} width={25} height={25} />
+                      Custom domain
+                    </div>
+                    <div className="flex gap-2 text-white text-base">
+                      <Image src={"/checkmark.svg"} width={25} height={25} />
+                      Cancel anytime
+                    </div>
+                  </div>
+                  <button className="flex text-white text-lg gap-2 w-full p-2 mt-2 rounded-lg gradient-orange-red justify-center items-center hover:scale-105 select-button">
+                    Select{" "}
+                    <Image
+                      src={"/right-arrow.svg"}
+                      width={20}
+                      height={15}
+                      className="arrow"
+                    />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </section>
