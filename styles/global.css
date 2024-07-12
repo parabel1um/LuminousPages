@@ -13,7 +13,7 @@ body {
 }
 
 .nav-item {
-  @apply font-semibold text-lg text-center transition hover:text-[#FFB100] text-white hover:underline underline-offset-4;
+  @apply font-semibold text-base text-center transition hover:text-[#FFB100] text-[#CFCFCF] hover:underline underline-offset-4;
 }
 
 .underlined-element {
@@ -115,4 +115,86 @@ body {
   -webkit-box-shadow: 0px 0px 58px 10px rgba(42, 180, 255, 0.9);
   -moz-box-shadow: 0px 0px 58px 10px rgba(42, 180, 255, 0.9);
   box-shadow: 0px 0px 58px 10px rgba(42, 180, 255, 0.9);
+}
+
+.yellow-green-gradient {
+  background: #dde416;
+  background: linear-gradient(to left, #dde416 0%, #d91c3b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cyan-purple-gradient {
+  background: #0de6ac;
+  background: linear-gradient(to left, #0de6ac 0%, #7109d3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.no-gradient {
+  background: none;
+  -webkit-background-clip: border-box;
+  -webkit-text-fill-color: initial;
+}
+
+.telegram-gradient {
+  background: #2bb2f7;
+  background: linear-gradient(to right, #2bb2f7 0%, #2390c9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.discord-gradient {
+  background: #605aff;
+  background: linear-gradient(to right, #605aff 0%, #454fbd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.whatsapp-gradient {
+  background: #51e749;
+  background: linear-gradient(to right, #51e749 0%, #42b451 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.instagram-gradient {
+  background: #a910f3;
+  background: radial-gradient(
+    ellipse farthest-corner at center center,
+    #a910f3 4%,
+    #fe09c0 21%,
+    #ff3825 64%,
+    #fdbf0c 98%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tiktok-gradient {
+  background: #2cf4ef;
+  background: linear-gradient(to right, #2cf4ef 0%, #3d3d3d 50%, #fe335a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes fadeInUpBlur {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.animate-appear {
+  animation: fadeInUpBlur 1s ease-out forwards;
+}
+
+.blur {
+  filter: blur(2px);
 }

@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth";
 import SessionProvider from "../utils/SessionProvider";
+import RouteChangeTracker from "./routeChange";
 
 export const metadata = {
   title: "Luminous Pages",
@@ -13,9 +14,8 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body>
         <SessionProvider session={session}>
-          <div className="mx-auto max-w-5xl text-2xl gap-2 mb-10">
-            {children}
-          </div>
+          <RouteChangeTracker />
+          <div className="mx-auto text-2xl gap-2 mb-10">{children}</div>
         </SessionProvider>
       </body>
     </html>
