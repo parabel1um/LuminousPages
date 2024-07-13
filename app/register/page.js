@@ -3,7 +3,9 @@ import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import "@/styles/global.css";
+import { signIn } from "next-auth/react";
 
 const Register = () => {
   const [error, setError] = useState("");
@@ -16,8 +18,13 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const email = e.target[0].value;
-    const password = e.target[1].value;
+    const name = e.target[0].value;
+    const email = e.target[1].value;
+    const password = e.target[2].value;
+
+    if (!name) {
+      setError("Name is required");
+    }
 
     if (!isValidEmail(email)) {
       setError("Email is invalid");
@@ -25,7 +32,7 @@ const Register = () => {
       return;
     }
 
-    if (!password || password.length < 8) {
+    if (!password || password.length < 10) {
       setError("Password is invalid");
 
       return;
@@ -40,6 +47,8 @@ const Register = () => {
         body: JSON.stringify({
           email,
           password,
+          username,
+          name,
         }),
       });
 
@@ -59,33 +68,65 @@ const Register = () => {
 
   return (
     <div className="flex items-center justify-center h-screen p-24 w-full">
-      <div className="bg-black p-8 rounded shadow-md w-96 flex justify-center items-center flex-col">
-        <h1 className="text-4xl text-center font-semibold mb-8 text-white">
+      <div className="bg-white border-black border-4 p-16 yellow-shadow rounded-3xl w-[500px] flex justify-center items-center flex-col">
+        <h1 className="text-4xl text-center font-semibold mb-8 text-black">
           Register
         </h1>
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400 focus_text-black"
-            placeholder="Email"
-            required
-          ></input>
-          <input
-            type="password"
-            className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400 focus_text-black"
-            placeholder="Password"
-            required
-          ></input>
+          <div className="flex flex-col my-3">
+            <p className="text-sm mb-0.5">Name</p>
+            <input
+              type="text"
+              className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400 focus_text-black"
+              placeholder=""
+              required
+            ></input>
+          </div>
+          <div className="flex flex-col my-3">
+            <p className="text-sm mb-0.5">Email</p>
+            <input
+              type="text"
+              className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400"
+              placeholder=""
+              required
+            />
+          </div>
+          <div className="flex flex-col mt-2">
+            <p className="text-sm mb-0.5">Password</p>
+            <input
+              type="password"
+              className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400 focus_text-black"
+              placeholder="At least 10 characters"
+              required
+            ></input>
+          </div>
+          <p className="text-red-600 text-[16px] mb-1">{error && error}</p>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+            className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 mb-3"
           >
             Register
           </button>
-          <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
+          <button
+            className="text-black text-lg bg-white border-2 border-black rounded w-full hover:bg-gray-300 py-2 mt-2 flex items-center justify-center gap-3 p-2"
+            onClick={() => {
+              signIn("google");
+            }}
+          >
+            <Image
+              src={"/google_logo_icon.png"}
+              alt="Google icon"
+              width={25}
+              height={25}
+            ></Image>
+            Sign Up With Google
+          </button>
         </form>
         <div className="text-center text-gray-500 mt-4">- OR -</div>
-        <Link className="text-white mt-2 hover:underline" href={"/login"}>
+        <Link
+          className="text-black mt-2 text-center hover:underline"
+          href={"/login"}
+        >
           Login with an existing account.
         </Link>
       </div>

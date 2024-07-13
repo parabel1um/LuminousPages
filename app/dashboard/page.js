@@ -1,24 +1,35 @@
-import Image from "next/image";
-import "@/styles/global.css";
+"use client";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import Image from "next/image";
+import "@/styles/global.css";
+import Client from "./client";
 
 const Dashboard = async () => {
-  const session = await getServerSession();
-  if (!session) {
+  const serverSession = await getServerSession();
+
+  if (!serverSession) {
     redirect("/");
   }
 
   return (
-    <main className="flex flex items-center justify-between min-h-screen main left-0">
-      <div className="flex items-center">
+    <main
+      className="flex flex-row items-center w-full h-full
+ left-0 max-w-6xl mt-20"
+    >
+      <div className="w-1/6 flex items-start flex-col h-full">
         <Image
-          src="/LuminousPages.png"
+          src="/Luminous_Pages.png"
           width={300}
           height={120}
           alt="Luminous Pages Logo"
         />
+        <div>
+          {" "}
+          <Client initialSession={serverSession} />
+        </div>
       </div>
+      <div className="flex items-center w-5/6 h-96"></div>
     </main>
   );
 };

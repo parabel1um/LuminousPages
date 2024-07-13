@@ -15,7 +15,9 @@ export default async function RootLayout({ children }) {
       <body>
         <SessionProvider session={session}>
           <RouteChangeTracker />
-          <div className="mx-auto text-2xl gap-2 mb-10">{children}</div>
+          <div className="mx-auto text-2xl gap-2 mb-10 flex justify-center">
+            {children}
+          </div>
         </SessionProvider>
       </body>
     </html>

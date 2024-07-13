@@ -7,6 +7,7 @@ import { useSession, signOut } from "next-auth/react";
 
 export default function Home() {
   const { data: session } = useSession();
+
   const services = [
     { name: "community", style: "yellow-green-gradient" },
     { name: "Telegram channel", style: "telegram-gradient" },
@@ -23,6 +24,7 @@ export default function Home() {
   const [isDashboardHovered, setIsDashboardHovered] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [monthly, setMonthly] = useState(true);
+
   const typingSpeed = 50;
   const eraseSpeed = 30;
   const pauseTime = 2500;
@@ -265,14 +267,14 @@ export default function Home() {
       <section className="relative top-48 w-full h-full flex flex-col justify-center items-center">
         <section className="flex justify-left max-w-[1100px] gap-4 w-full">
           <div className="">
-            <h1 className="font-extrabold lg:text-4xl text-2xl text-left lg:text-wrap flex flex-col gap-5 tracking-tight text-white ">
+            <h1 className="font-extrabold lg:text-4xl text-2xl text-left lg:text-wrap flex flex-col gap-5 tracking-tight text-white">
               <span className="flex flex-wrap gap-3">
                 {words.slice(0, 5).map((word, index) => {
                   if (index === 2) {
                     return (
                       <span
                         key={index}
-                        className="px-2 relative animate-appear blur"
+                        className="inline-block px-2 relative animate-appear blur"
                         style={{
                           animationDelay: `${index * 0.1}s`,
                         }}
@@ -321,7 +323,7 @@ export default function Home() {
                         key={index}
                         className="inline-block animate-appear blur"
                         style={{
-                          animationDelay: `${index * 0.1}s`,
+                          animationDelay: `${index * 0.2}s`,
                         }}
                       >
                         {word}{" "}
@@ -332,24 +334,31 @@ export default function Home() {
               </span>
             </h1>
 
-            <h1 className="z-20 relative top-80 lg:whitespace-nowrap lg:text-lg text-base font-bold mt-2 tracking-tight">
-              <span className="flex flex-col gap-1 text-center text-white">
+            <h1 className="mt-8 text-gray-400 lg:whitespace-nowrap lg:text-lg text-base font-bold tracking-tight">
+              <span className="flex flex-col text-left">
                 <span>
-                  The <span className="underlined-element">ultimate</span> tool
-                  for creating{" "}
+                  The ultimate tool for creating{" "}
                   <span className="underlined-element">courses</span>,{" "}
                   <span className="underlined-element">websites</span>, or{" "}
-                  <span className="underlined-element">
-                    paid-access platforms
-                  </span>
                 </span>
                 <span>
-                  <span className="font-extrabold text-xl underlined-element">
+                  <span className="underlined-element">
+                    paid-access platforms
+                  </span>{" "}
+                  <span className="font-extrabold underlined-element">
                     with ease.
                   </span>
                 </span>
               </span>
             </h1>
+            <div>
+              <button
+                href={"/sign-up"}
+                className="bg-white rounded-lg h-8 w-32 text-sm font-semibold mt-4 transition hover:bg-zinc-200 duration-400"
+              >
+                Start Creating
+              </button>
+            </div>
           </div>
         </section>
         <section className="flex flex-col">

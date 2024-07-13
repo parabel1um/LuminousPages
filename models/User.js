@@ -13,6 +13,19 @@ const userSchema = new Schema(
       type: String,
       required: false,
     },
+    username: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    pages: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Page",
+    },
   },
   { timestamps: true }
 );

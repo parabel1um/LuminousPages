@@ -17,7 +17,7 @@ body {
 }
 
 .underlined-element {
-  @apply font-bold underline text-amber-500 decoration-amber-500 decoration-dashed decoration-[3px] underline-offset-4;
+  @apply font-bold text-amber-500 decoration-amber-500 decoration-dashed decoration-[3px] underline-offset-4;
 }
 
 .underlined-element-blue {
@@ -50,6 +50,11 @@ body {
 
 .underlined-element-white {
   @apply font-bold underline decoration-amber-500 decoration-dashed decoration-[3px] underline-offset-4;
+}
+
+.yellow-shadow {
+  -webkit-box-shadow: 4px 4px 29px -9px #ffb100;
+  box-shadow: 4px 4px 29px -9px #ffb100;
 }
 
 .text-gradient-light-blue {
@@ -192,7 +197,9 @@ body {
 }
 
 .animate-appear {
-  animation: fadeInUpBlur 1s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUpBlur 1s ease-in-out forwards;
 }
 
 .blur {
