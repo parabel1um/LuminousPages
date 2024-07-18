@@ -1,16 +1,12 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { Session } from "next-auth";
 
-const Client = ({ initialSession }) => {
+const Client: React.FC<{ initialSession: Session | null }> = ({
+  initialSession,
+}) => {
   const { data: session } = useSession();
-
-  useEffect(() => {
-    if (!session) {
-      console.log("client session not available");
-    }
-  }, [session]);
 
   const userSession = session || initialSession;
 
@@ -20,7 +16,7 @@ const Client = ({ initialSession }) => {
 
   console.log(userSession);
 
-  return <div>{userSession.user.name}</div>;
+  return <div>{userSession.user?.name}</div>;
 };
 
 export default Client;

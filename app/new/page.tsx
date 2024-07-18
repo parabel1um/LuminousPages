@@ -1,9 +1,9 @@
 import Image from "next/image";
 
-const NewPage = () => {
+export default function NewPage() {
   return (
     <div>
-      <main className="flex flex items-center justify-between min-h-screen main left-0">
+      <main className="flex items-center justify-between min-h-screen main left-0">
         <div className="flex items-center">
           <Image
             src="/Luminous_Pages.png"
@@ -15,6 +15,4 @@ const NewPage = () => {
       </main>
     </div>
   );
-};
-
-export default NewPage;
+}

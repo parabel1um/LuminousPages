@@ -1,54 +1,53 @@
 "use client";
-import React from "react";
-import { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import "@/styles/global.css";
 import { signIn } from "next-auth/react";
 
-const Register = () => {
-  const [error, setError] = useState("");
+const Register: React.FC = () => {
+  const [error, setError] = useState<string>("");
   const router = useRouter();
 
-  const isValidEmail = (email) => {
+  const isValidEmail = (email: string): boolean => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const name = e.target[0].value;
-    const email = e.target[1].value;
-    const password = e.target[2].value;
+    const form = e.target as HTMLFormElement;
+    const name = form[0] as HTMLInputElement;
+    const email = form[1] as HTMLInputElement;
+    const password = form[2] as HTMLInputElement;
 
-    if (!name) {
+    if (!name.value) {
       setError("Name is required");
-    }
-
-    if (!isValidEmail(email)) {
-      setError("Email is invalid");
-
       return;
     }
 
-    if (!password || password.length < 10) {
-      setError("Password is invalid");
+    if (!isValidEmail(email.value)) {
+      setError("Email is invalid");
+      return;
+    }
 
+    if (!password.value || password.value.length < 10) {
+      setError("Password is invalid");
       return;
     }
 
     try {
       const res = await fetch("/api/register", {
         method: "POST",
-        header: {
+        headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email,
-          password,
-          username,
-          name,
+          email: email.value,
+          password: password.value,
+          username: name.value,
+          name: name.value,
         }),
       });
 
@@ -62,7 +61,7 @@ const Register = () => {
       }
     } catch (error) {
       setError("Error, try again");
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -80,12 +79,12 @@ const Register = () => {
               className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400 focus_text-black"
               placeholder=""
               required
-            ></input>
+            />
           </div>
           <div className="flex flex-col my-3">
             <p className="text-sm mb-0.5">Email</p>
             <input
-              type="text"
+              type="email"
               className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400"
               placeholder=""
               required
@@ -98,7 +97,7 @@ const Register = () => {
               className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400 focus_text-black"
               placeholder="At least 10 characters"
               required
-            ></input>
+            />
           </div>
           <p className="text-red-600 text-[16px] mb-1">{error && error}</p>
           <button
@@ -108,6 +107,7 @@ const Register = () => {
             Register
           </button>
           <button
+            type="button"
             className="text-black text-lg bg-white border-2 border-black rounded w-full hover:bg-gray-300 py-2 mt-2 flex items-center justify-center gap-3 p-2"
             onClick={() => {
               signIn("google");
@@ -118,7 +118,7 @@ const Register = () => {
               alt="Google icon"
               width={25}
               height={25}
-            ></Image>
+            />
             Sign Up With Google
           </button>
         </form>

@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState, useRouter } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import "../styles/global.css";
 import { useSession, signOut } from "next-auth/react";
@@ -8,7 +9,12 @@ import { useSession, signOut } from "next-auth/react";
 export default function Home() {
   const { data: session } = useSession();
 
-  const services = [
+  interface Service {
+    name: string;
+    style: string;
+  }
+
+  const services: Service[] = [
     { name: "community", style: "yellow-green-gradient" },
     { name: "Telegram channel", style: "telegram-gradient" },
     { name: "Discord server", style: "discord-gradient" },
@@ -17,13 +23,13 @@ export default function Home() {
     { name: "WhatsApp channel", style: "whatsapp-gradient" },
     { name: "digital content", style: "cyan-purple-gradient" },
   ];
-  const [index, setIndex] = useState(0);
-  const [typingText, setTypingText] = useState("");
-  const [textStyle, setTextStyle] = useState("");
-  const [isTyping, setIsTyping] = useState(true);
-  const [isDashboardHovered, setIsDashboardHovered] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [monthly, setMonthly] = useState(true);
+  const [index, setIndex] = useState<number>(0);
+  const [typingText, setTypingText] = useState<string>("");
+  const [textStyle, setTextStyle] = useState<string>("");
+  const [isTyping, setIsTyping] = useState<boolean>(true);
+  const [isDashboardHovered, setIsDashboardHovered] = useState<boolean>(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [monthly, setMonthly] = useState<boolean>(true);
 
   const typingSpeed = 50;
   const eraseSpeed = 30;
@@ -32,7 +38,7 @@ export default function Home() {
   const words = text.split(" ");
 
   useEffect(() => {
-    let timer;
+    let timer: NodeJS.Timeout;
 
     const typeAndErase = () => {
       const currentService = services[index];
@@ -72,18 +78,18 @@ export default function Home() {
   }, [index, isTyping]);
 
   useEffect(() => {
-    const sections = document.querySelectorAll("[id^='section-']");
+    const sections = document.querySelectorAll<HTMLElement>("[id^='section-']");
 
     const handleScroll = () => {
-      let currentIndex = null;
+      let currentIndex: number | null = null;
       sections.forEach((section, index) => {
         const rect = section.getBoundingClientRect();
         const top = rect.top; // distance from top of container to top of viewport
         const height = rect.height;
         const windowHeight = window.innerHeight;
 
-        let multiplierScreen;
-        let multiplierArea;
+        let multiplierScreen: number;
+        let multiplierArea: number;
         if (windowHeight > 2500) {
           multiplierScreen = 1.0;
           multiplierArea = 0.5;
@@ -116,6 +122,11 @@ export default function Home() {
           multiplierArea = 0.95;
         }
 
+        const scrollIndicator1 =
+          document.querySelector<HTMLElement>(`.scroll-indicator-1`);
+        const scrollIndicator2 =
+          document.querySelector<HTMLElement>(`.scroll-indicator-2`);
+
         if (top > 0 && top < window.innerHeight * multiplierArea) {
           currentIndex = index;
           const scrollPercentage = Math.min(
@@ -129,7 +140,7 @@ export default function Home() {
           );
 
           if (index === 0 || index === 1) {
-            const scrollIndicator = document.querySelector(
+            const scrollIndicator = document.querySelector<HTMLElement>(
               `.scroll-indicator-${index + 1}`
             );
 
@@ -138,16 +149,13 @@ export default function Home() {
             }
           }
         } else {
-          const scrollIndicator = document.querySelector(
+          const scrollIndicator = document.querySelector<HTMLElement>(
             `.scroll-indicator-${index + 1}`
           );
 
-          const scrollIndicator1 =
-            document.querySelector(`.scroll-indicator-1`);
-          const scrollIndicator2 =
-            document.querySelector(`.scroll-indicator-2`);
-
           if (
+            scrollIndicator1 &&
+            scrollIndicator2 &&
             scrollIndicator &&
             scrollIndicator.getBoundingClientRect().top < 0 &&
             scrollIndicator.getBoundingClientRect().bottom < 0
@@ -156,11 +164,12 @@ export default function Home() {
             scrollIndicator2.style.height = "0%";
           }
         }
+        setHoveredIndex(currentIndex);
       });
-      setHoveredIndex(currentIndex);
     };
 
     window.addEventListener("scroll", handleScroll);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -236,7 +245,7 @@ export default function Home() {
             <div className="flex gap-3">
               <div className="flex items-center">
                 <Link
-                  href={"/login"}
+                  href={"/dashboard"}
                   className="text-base relative text-white rounded-lg border-2 p-4 font-semibold whitespace-nowrap h-5 inline-flex justify-center items-center gap-[0.5em] transition-all hover:scale-105 hover:text-[#FFB100]"
                   onMouseEnter={() => setIsDashboardHovered(true)}
                   onMouseLeave={() => setIsDashboardHovered(false)}
@@ -353,7 +362,7 @@ export default function Home() {
             </h1>
             <div>
               <button
-                href={"/sign-up"}
+                onClick={() => (window.location.href = "/sign-up")}
                 className="bg-white rounded-lg h-8 w-32 text-sm font-semibold mt-4 transition hover:bg-zinc-200 duration-400"
               >
                 Start Creating
@@ -603,7 +612,12 @@ export default function Home() {
                       Analytics
                     </div>
                     <div className="flex gap-2 text-white text-base">
-                      <Image src={"/checkmark.svg"} width={25} height={25} />
+                      <Image
+                        alt={"checkmark"}
+                        src={"/checkmark.svg"}
+                        width={25}
+                        height={25}
+                      />
                       Cancel anytime
                     </div>
                   </div>

@@ -1,5 +1,7 @@
+import { ReactNode } from "react";
 import { getServerSession } from "next-auth";
-import SessionProvider from "../utils/SessionProvider";
+import { Session } from "next-auth";
+import AuthProvider from "../utils/AuthProvider";
 import RouteChangeTracker from "./routeChange";
 
 export const metadata = {
@@ -7,18 +9,22 @@ export const metadata = {
   description: "Create webpages easily",
 };
 
-export default async function RootLayout({ children }) {
-  const session = await getServerSession();
+interface RootLayoutProps {
+  children: ReactNode;
+}
+
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const session: Session | null = await getServerSession();
 
   return (
     <html lang="en">
       <body>
-        <SessionProvider session={session}>
+        <AuthProvider session={session}>
           <RouteChangeTracker />
           <div className="mx-auto text-2xl gap-2 mb-10 flex justify-center">
             {children}
           </div>
-        </SessionProvider>
+        </AuthProvider>
       </body>
     </html>
   );

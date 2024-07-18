@@ -1,4 +1,3 @@
-"use client";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import Image from "next/image";
@@ -13,10 +12,7 @@ const Dashboard = async () => {
   }
 
   return (
-    <main
-      className="flex flex-row items-center w-full h-full
- left-0 max-w-6xl mt-20"
-    >
+    <main className="flex flex-row items-center w-full h-full left-0 max-w-6xl mt-20">
       <div className="w-1/6 flex items-start flex-col h-full">
         <Image
           src="/Luminous_Pages.png"
@@ -25,7 +21,6 @@ const Dashboard = async () => {
           alt="Luminous Pages Logo"
         />
         <div>
-          {" "}
           <Client initialSession={serverSession} />
         </div>
       </div>

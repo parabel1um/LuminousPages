@@ -1,10 +1,19 @@
 import User from "../../../models/User";
 import connect from "../../../utils/db";
 import bcrypt from "bcrypt";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export const POST = async (request) => {
-  const { email, password, username, name, pages } = await request.json();
+type RequestBody = {
+  email: string;
+  password: string;
+  username: string;
+  name: string;
+  pages?: string[];
+};
+
+export const POST = async (request: NextRequest) => {
+  const { email, password, username, name, pages }: RequestBody =
+    await request.json();
 
   await connect();
 
@@ -27,7 +36,7 @@ export const POST = async (request) => {
     await newUser.save();
     return new NextResponse("User is registered", { status: 200 });
   } catch (error) {
-    return new NextResponse(error, {
+    return new NextResponse((error as Error).message, {
       status: 500,
     });
   }

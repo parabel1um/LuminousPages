@@ -2,9 +2,13 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
+type HistoryType = {
+  [key: string]: number;
+};
+
 export default function RouteChangeTracker() {
-  const pathname = usePathname();
-  const [history, setHistory] = useState([]);
+  const pathname: string = usePathname();
+  const [history, setHistory] = useState<HistoryType>({});
 
   useEffect(() => {
     console.log(pathname);
